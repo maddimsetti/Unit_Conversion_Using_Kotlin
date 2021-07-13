@@ -1,10 +1,8 @@
 package com.example.unitconversion
 
-class Context(strategy: Strategy) {
-    private val strategy: Strategy = TODO()
+class Context(private val strategy: Strategy) {
 
-    fun exceuteStrategy(fromUnit:String, toUnit: String, inputValue: Double): Double {
-            var result: Double = strategy.convert(fromUnit, toUnit, inputValue)
-            return result
-        }
+    fun executeStrategy(fromUnit: String, toUnit: String, inputValue: Double): Double {
+        return strategy.convert(fromUnit, toUnit, inputValue)
+    }
 }

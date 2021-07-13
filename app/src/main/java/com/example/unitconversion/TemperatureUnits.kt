@@ -9,18 +9,15 @@ class TemperatureUnits: Strategy {
         } else if (fromUnit == "Celsius" && toUnit == "Kelvin") {
             return inputValue + 273.15
         } else if (fromUnit == "Fahrenheit" && toUnit == "Celsius") {
-            val result = (inputValue - 32) * (5 / 9)
-            return inputValue
+            return ((inputValue - 32) * (5 / 9))
         } else if (fromUnit == "Fahrenheit" && toUnit == "Fahrenheit") {
             return inputValue
         } else if (fromUnit == "Fahrenheit" && toUnit == "Kelvin") {
-            return (inputValue - 32) * (5 / 9) + 273.15
+            return (((inputValue - 32) * (5 / 9)) + 273.15)
         } else if (fromUnit == "Kelvin" && toUnit == "Celsius") {
-            val result = inputValue - 273.15
-            return inputValue
+            return inputValue - 273.15
         } else if (fromUnit == "Kelvin" && toUnit == "Fahrenheit") {
-            val result = (inputValue - 273.15) * (9 / 5) + 32
-            return inputValue
+            return (inputValue - 273.15) * (9 / 5) + 32
         } else if (fromUnit == "Kelvin" && toUnit == "Kelvin") {
             return inputValue
         }

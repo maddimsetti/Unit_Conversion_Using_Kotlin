@@ -8,19 +8,19 @@ import android.widget.*
 
 class HomeActivity : AppCompatActivity() {
 
-    lateinit var unitConversionSpinner : Spinner
+    private lateinit var unitConversionSpinner : Spinner
     lateinit var fromUnitConversionSpinner : Spinner
     lateinit var toUnitConversionSpinner : Spinner
-    lateinit var editText : EditText
-    lateinit var resultView : TextView
-    lateinit var button: Button
+    private lateinit var editText : EditText
+    private lateinit var resultView : TextView
+    private lateinit var button: Button
     lateinit var  selectedType : String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
         viewTheSelectedItems()
-
+        onClick()
     }
 
     private fun viewTheSelectedItems() {
@@ -75,7 +75,7 @@ class HomeActivity : AppCompatActivity() {
                     )
                     else -> null
                 }
-                Toast.makeText(parent?.context, selectedType, Toast.LENGTH_LONG).show()
+//                Toast.makeText(parent?.context, selectedType, Toast.LENGTH_LONG).show()
                 fromUnitConversionSpinner.adapter = unitSelection
                 toUnitConversionSpinner.adapter = unitSelection
 
@@ -85,27 +85,32 @@ class HomeActivity : AppCompatActivity() {
                 TODO("Not yet implemented")
             }
         }
+    }
 
-        button.setOnClickListener  { View.OnClickListener {
+    private fun onClick() {
+
+        button.setOnClickListener {
+//            Toast.makeText(this, "Message Checking", Toast.LENGTH_LONG).show()
             val fromSelectedUnit = fromUnitConversionSpinner.selectedItem.toString()
             val toSelectedUnit = toUnitConversionSpinner.selectedItem.toString()
 
             var inputValue: Double = editText.text.toString().toDouble()
 
-            var context =  Context(LengthUnits())
-
-
+            var context = when (selectedType) {
+                "Length" -> Context(LengthUnits())
+                "Mass" -> Context(MassUnits())
+                "Temperature" -> Context(TemperatureUnits())
+                "Volume" -> Context(VolumeUnits())
+                else -> null
+            }
             val result = inputValue?.let { it1 ->
-                context.exceuteStrategy(fromSelectedUnit, toSelectedUnit,
+                context?.executeStrategy(fromSelectedUnit, toSelectedUnit,
                     it1
                 )
             }
             resultView.text = "$result"
 
         }
-
-        }
-
     }
 
 }
